@@ -1,0 +1,21 @@
+{
+  "name": "db-migrate-startkit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "db-migrate up --config database.json -e pg -m ./migrations/init",
+    "migrate": "db-migrate up --config database.json -e pg -m ./migrations/task",
+    "create": "db-migrate create --config database.json -e pg -m ./migrations/task",
+    "start": "docker compose --env-file .env.example up -d --build",
+    "restart": "docker compose --env-file .env.example up --force-recreate --build -d",
+    "stop": "docker compose --env-file .env.example stop",
+    "clean": "docker compose --env-file .env.example down -v"
+  },
+  "dependencies": {
+    "db-migrate": "^0.11.14",
+    "db-migrate-pg": "^1.5.2"
+  },
+  "author": "HexSchool",
+  "license": "ISC"
+}
