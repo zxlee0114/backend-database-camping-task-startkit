@@ -1,7 +1,6 @@
 CREATE TABLE "CREDIT_PACKAGE" (
   "id" serial PRIMARY KEY,
   "name" varchar(50) NOT NULL,
-  "cover_url" varchar(2048),
   "credit_amount" integer NOT NULL,
   "price" numeric(10,2) NOT NULL,
   "created_at" timestamp NOT NULL DEFAULT (CURRENT_TIMESTAMP)
