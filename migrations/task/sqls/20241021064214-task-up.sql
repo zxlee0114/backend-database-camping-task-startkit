@@ -15,6 +15,15 @@
 --     5. 用戶名稱為`Q太郎`，Email 為`starplatinum@hexschooltest.io`，Role為`USER`
 --     6. 用戶名稱為 透明人，Email 為 opacity0@hexschooltest.io，Role 為 USER
 
+-- 1-1 INSERT INTO 資料表 (欄位) VALUES (對應欄位的值)
+INSERT INTO "USER" (name, email, role) VALUES
+('李燕容', 'lee2000@hexschooltest.io', 'USER'),
+('王小明', 'wXlTq@hexschooltest.io', 'USER'),
+('肌肉棒子', 'muscle@hexschooltest.io', 'USER'),
+('好野人', 'richman@hexschooltest.io', 'USER'),
+('Q太郎', 'starplatinum@hexschooltest.io', 'USER'),
+('透明人', 'opacity0@hexschooltest.io', 'USER');
+
 -- 1-2 修改：用 Email 找到 李燕容、肌肉棒子、Q太郎，如果他的 Role 為 USER 將他的 Role 改為 COACH
 
 -- 1-3 刪除：刪除USER 資料表中，用 Email 找到透明人，並刪除該筆資料
