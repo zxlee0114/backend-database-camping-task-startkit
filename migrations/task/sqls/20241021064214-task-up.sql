@@ -68,19 +68,26 @@ LIMIT 3;
     -- 1. `王小明` 購買 `14 堂組合包方案`
     -- 2. `王小明` 購買 `21 堂組合包方案`
     -- 3. `好野人` 購買 `14 堂組合包方案`
-INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid) VALUES
-((SELECT id FROM "USER" WHERE name = '王小明'), 
-(SELECT id FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'), 
-(SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
-(SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')), --王小明 14堂方案
-((SELECT id FROM "USER" WHERE name = '王小明'), 
-(SELECT id FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'), 
-(SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
-(SELECT price FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案')), --王小明 21堂方案
-((SELECT id FROM "USER" WHERE name = '好野人'), 
-(SELECT id FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'), 
-(SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
-(SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')); --好野人 14堂方案
+INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid) 
+VALUES
+  ( --王小明 14堂方案
+    (SELECT id FROM "USER" WHERE name = '王小明'), 
+    (SELECT id FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'), 
+    (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+    (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案') 
+  ), 
+  ( --王小明 21堂方案
+    (SELECT id FROM "USER" WHERE name = '王小明'), 
+    (SELECT id FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'), 
+    (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
+    (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案')
+  ), 
+  ( --好野人 14堂方案
+    (SELECT id FROM "USER" WHERE name = '好野人'), 
+    (SELECT id FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'), 
+    (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+    (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
+  ); 
 
 
 
@@ -95,25 +102,72 @@ INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, pr
     -- 1. 將用戶`李燕容`新增為教練，並且年資設定為2年（提示：使用`李燕容`的email ，取得 `李燕容` 的 `id` ）
     -- 2. 將用戶`肌肉棒子`新增為教練，並且年資設定為2年
     -- 3. 將用戶`Q太郎`新增為教練，並且年資設定為2年
-INSERT INTO "COACH" (user_id, experience_years) VALUES 
-((SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io'), 2),
-((SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io'), 2),
-((SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io'), 2);
+INSERT INTO "COACH" (user_id, experience_years) 
+VALUES 
+  (
+    (SELECT id FROM "USER" 
+    WHERE email = 'lee2000@hexschooltest.io'), 
+    2
+  ),
+  (
+    (SELECT id FROM "USER" 
+    WHERE email = 'muscle@hexschooltest.io'), 
+    2
+  ),
+  (
+    (SELECT id FROM "USER" 
+    WHERE email = 'starplatinum@hexschooltest.io'), 
+    2
+  );
 
 -- 3-2. 新增：承1，為三名教練新增專長資料至 `COACH_LINK_SKILL` ，資料需求如下：
     -- 1. 所有教練都有 `重訓` 專長
     -- 2. 教練`肌肉棒子` 需要有 `瑜伽` 專長
     -- 3. 教練`Q太郎` 需要有 `有氧運動` 與 `復健訓練` 專長
-INSERT INTO "COACH_LINK_SKILL" (coach_id, skill_id) VALUES
---所有：重訓
-((SELECT id FROM "COACH" WHERE user_id=(SELECT id FROM "USER" WHERE email='lee2000@hexschooltest.io')),(SELECT id FROM "SKILL" WHERE name='重訓')),
-((SELECT id FROM "COACH" WHERE user_id=(SELECT id FROM "USER" WHERE email='muscle@hexschooltest.io')),(SELECT id FROM "SKILL" WHERE name='重訓')),
-((SELECT id FROM "COACH" WHERE user_id=(SELECT id FROM "USER" WHERE email='starplatinum@hexschooltest.io')),(SELECT id FROM "SKILL" WHERE name='重訓')),
---肌肉棒子：瑜珈
-((SELECT id FROM "COACH" WHERE user_id=(SELECT id FROM "USER" WHERE email='muscle@hexschooltest.io')),(SELECT id FROM "SKILL" WHERE name='瑜伽')),
---Q太郎：有氧運動、復健訓練
-((SELECT id FROM "COACH" WHERE user_id=(SELECT id FROM "USER" WHERE email='starplatinum@hexschooltest.io')),(SELECT id FROM "SKILL" WHERE name='有氧運動')),
-((SELECT id FROM "COACH" WHERE user_id=(SELECT id FROM "USER" WHERE email='starplatinum@hexschooltest.io')),(SELECT id FROM "SKILL" WHERE name='復健訓練'));
+INSERT INTO "COACH_LINK_SKILL" (coach_id, skill_id) 
+VALUES
+( --所有教練：重訓
+    (SELECT id FROM "COACH" 
+    WHERE user_id=
+        (SELECT id FROM "USER" 
+        WHERE email='lee2000@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name='重訓')
+),
+(
+    (SELECT id FROM "COACH" 
+    WHERE user_id=
+        (SELECT id FROM "USER" 
+        WHERE email='muscle@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name='重訓')
+),
+(
+    (SELECT id FROM "COACH" 
+    WHERE user_id=
+        (SELECT id FROM "USER" 
+        WHERE email='starplatinum@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name='重訓')
+),
+( --肌肉棒子：瑜珈
+    (SELECT id FROM "COACH" 
+    WHERE user_id=
+        (SELECT id FROM "USER" 
+        WHERE email='muscle@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name='瑜伽')
+),
+( --Q太郎：有氧運動、復健訓練
+    (SELECT id FROM "COACH" 
+    WHERE user_id=
+        (SELECT id FROM "USER" 
+        WHERE email='starplatinum@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name='有氧運動')
+),
+(
+    (SELECT id FROM "COACH" 
+    WHERE user_id=
+        (SELECT id FROM "USER" 
+        WHERE email='starplatinum@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name='復健訓練')
+);
 
 
 -- 3-3 修改：更新教練的經驗年數，資料需求如下：
