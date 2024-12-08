@@ -119,6 +119,19 @@ INSERT INTO "COACH_LINK_SKILL" (coach_id, skill_id) VALUES
 -- 3-3 修改：更新教練的經驗年數，資料需求如下：
     -- 1. 教練`肌肉棒子` 的經驗年數為3年
     -- 2. 教練`Q太郎` 的經驗年數為5年
+-- update 資料表 set 欄位的更新值 where 條件
+UPDATE "COACH" 
+SET experience_years = 3 
+WHERE user_id = (
+    SELECT id 
+    FROM "USER" 
+    WHERE email = 'muscle@hexschooltest.io');
+UPDATE "COACH" 
+SET experience_years = 5 
+WHERE user_id = (
+    SELECT id 
+    FROM "USER" 
+    WHERE email = 'starplatinum@hexschooltest.io');
 
 -- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
 
