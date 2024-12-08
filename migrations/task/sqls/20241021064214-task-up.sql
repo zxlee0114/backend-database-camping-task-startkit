@@ -134,8 +134,8 @@ WHERE user_id = (
     WHERE email = 'starplatinum@hexschooltest.io');
 
 -- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
-insert into "SKILL" (name) values ('空中瑜伽');
-delete from "SKILL" where name = '空中瑜伽';
+INSERT INTO "SKILL" (name) VALUES ('空中瑜伽');
+DELETE FROM "SKILL" WHERE name = '空中瑜伽';
 
 
 --  ████████  █████   █    █   █ 
