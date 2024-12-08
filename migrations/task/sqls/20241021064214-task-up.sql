@@ -26,7 +26,7 @@ INSERT INTO "USER" (name, email, role) VALUES
 -- 1-2 修改：用 Email 找到 李燕容、肌肉棒子、Q太郎，如果他的 Role 為 USER 將他的 Role 改為 COACH
 -- 修改：UPDATE 資料表 SET 欄位 = '值' WHERE 條件
 UPDATE "USER"
-SET role = 'coach'
+SET role = 'COACH'
 WHERE email IN 
 ('lee2000@hexschooltest.io', 
 'muscle@hexschooltest.io',  
@@ -38,6 +38,7 @@ DELETE FROM "USER"
 WHERE email = 'opacity0@hexschooltest.io';
 
 -- 1-4 查詢：取得USER 資料表目前所有用戶數量（提示：使用count函式）
+-- 1-4 
 
 -- 1-5 查詢：取得 USER 資料表所有用戶資料，並列出前 3 筆（提示：使用limit語法）
 
